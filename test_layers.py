@@ -6,7 +6,7 @@ from gptp.layers import PTPv2
 
 SYNC_MESSAGE_TRACE = [
     0x10,                                                        # transport specific + message type
-    0xA2,                                                        # reserved(0) + PTP version
+    0x02,                                                        # reserved(0) + PTP version
     0x00, 0x2C,                                                  # message length
     0x00,                                                        # domain number
     0x42,                                                        # reserved(1)
@@ -100,8 +100,8 @@ PDELAY_RESP_FOLLOW_UP_MESSAGE_TRACE = [
 class PTPv2LayerTest(unittest.TestCase):
 
     def test_dissect_sync_message(self):
-        #p = PTPv2(bytes(SYNC_MESSAGE_TRACE))
-        print(p.messageType)
+        p = PTPv2(bytes(SYNC_MESSAGE_TRACE))
+        print(p.MSG_TYPES)
         self.assertEqual(0x1, p.transportSpecific)
         self.assertEqual(0x0, p.messageType)
         self.assertEqual(0xA, p.reserved0)
